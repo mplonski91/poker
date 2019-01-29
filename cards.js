@@ -15,21 +15,13 @@ const cardValue = [
 ];
 const cardColor = ["tree", "diamond", "heart", "spades"];
 
-// Function to create single card
-const singleCard = (value, color) => {
-  this.value = value;
-  this.color = color;
-
-  return { value: this.value, color: this.color };
-};
-
 // Function to generate deck
 const generateDeck = () => {
-  let deck = [];
+  const deck = [];
 
   cardColor.forEach(color => {
     cardValue.forEach(value => {
-      deck.push(singleCard(value, color));
+      deck.push({ value, color });
     });
   });
 
