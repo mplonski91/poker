@@ -34,16 +34,13 @@ function randomFiveCard() {
   let generatedDeck = generateDeck();
 
   for (let index = 0; index < 5; index++) {
-    const card =
-      generatedDeck[Math.floor(Math.random() * generatedDeck.length)];
+    //get random index card on array deck
+    const indexCard = Math.floor(Math.random() * generatedDeck.length);
+    const card = generatedDeck[indexCard];
     fiveCards.push(card);
-    generatedDeck.splice(
-      generatedDeck.findIndex(
-        el => el.value === card.value && el.color === card.color
-      ),
-      1
-    );
+    generatedDeck.splice(indexCard, 1);
   }
+  // console.log(generatedDeck);
 
   return fiveCards;
 }
