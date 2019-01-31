@@ -8,15 +8,15 @@ const cardValue = [
   "8",
   "9",
   "10",
-  "J",
-  "Q",
-  "K",
-  "A"
+  "11",
+  "12",
+  "13",
+  "14"
 ];
-const cardColor = ["tree", "diamond", "heart", "spades"];
+const cardColor = ["♥", "♦", "♠", "♣"];
 
 // Function to generate deck
-const generateDeck = () => {
+function generateDeck() {
   const deck = [];
 
   cardColor.forEach(color => {
@@ -26,12 +26,39 @@ const generateDeck = () => {
   });
 
   return deck;
-};
+}
+
+// Function to change the value of the card
+function chnagesValues(cards) {
+  cards.forEach(element => {
+    switch (element.value) {
+      case "11":
+        element.value = "J";
+        break;
+      case "12":
+        element.value = "Q";
+        break;
+      case "13":
+        element.value = "K";
+        break;
+      case "14":
+        element.value = "A";
+        break;
+    }
+  });
+
+  return cards;
+}
+
+// Card sorting function
+function sortNumber(a, b) {
+  return a.value - b.value;
+}
 
 // Function to get five cards
 function randomFiveCard() {
-  const fiveCards = [];
   let generatedDeck = generateDeck();
+  const fiveCards = [];
 
   for (let index = 0; index < 5; index++) {
     //get random index card on array deck
@@ -40,12 +67,24 @@ function randomFiveCard() {
     fiveCards.push(card);
     generatedDeck.splice(indexCard, 1);
   }
-  // console.log(generatedDeck);
-
-  return fiveCards;
+  const sortedCards = fiveCards.sort(sortNumber);
+  const result = chnagesValues(sortedCards);
+  return result;
 }
+
+// Generating the final version of the sorted cards
+// function checkFiveCards() {
+//   const fiveCards = randomFiveCard();
+//   const changesCards = [];
+//   fiveCards.forEach(element => {
+//     let valueCard = element.value;
+//     changesCards.push(valueCard + " " + element.color);
+//   });
+//   return changesCards;
+// }
 
 // Export module
 module.exports = {
-  randomFiveCard
+  randomFiveCard,
+  cardValue
 };
