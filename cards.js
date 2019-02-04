@@ -72,17 +72,6 @@ function randomFiveCard() {
   return result;
 }
 
-// Generating the final version of the sorted cards
-// function checkFiveCards() {
-//   const fiveCards = randomFiveCard();
-//   const changesCards = [];
-//   fiveCards.forEach(element => {
-//     let valueCard = element.value;
-//     changesCards.push(valueCard + " " + element.color);
-//   });
-//   return changesCards;
-// }
-
 // Export module
 module.exports = {
   randomFiveCard,
