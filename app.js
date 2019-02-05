@@ -12,5 +12,4 @@ const userCards = cards.randomFiveCard();
 console.log(userCards);
 
 const inspectCards = new Inspect(userCards);
-const inspectionCards = inspectCards.inspectionCards();
-console.log(inspectionCards);
+console.log(inspectCards.inspectionCards());

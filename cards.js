@@ -74,6 +74,5 @@ function randomFiveCard() {
 
 // Export module
 module.exports = {
-  randomFiveCard,
-  cardValue
+  randomFiveCard
 };

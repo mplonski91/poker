@@ -69,6 +69,15 @@ class Inspect {
     return this.array.every(item => item.color === this.array[0].color);
   }
 
+  highCard() {
+    const cards = this.array;
+    const highSingleCard = cards.slice(-1);
+    const [{ value, color }] = highSingleCard;
+    const result = `Highest card is: ${value} ${color}`;
+
+    return result;
+  }
+
   inspectionCards() {
     const values = this.checkingValues();
     const highCard = this.highCard();
@@ -104,15 +113,6 @@ class Inspect {
     } else {
       return highCard;
     }
-  }
-
-  highCard() {
-    const cards = this.array;
-    const highSingleCard = cards.slice(-1);
-    const [{ value, color }] = highSingleCard;
-    const result = `Highest card is: ${value} ${color}`;
-
-    return result;
   }
 }
 
