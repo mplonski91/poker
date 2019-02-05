@@ -11,7 +11,6 @@ class Inspect {
         [item.value]: (result[item.value] || 0) + 1
       };
     }, {});
-    // console.log(verificationOfQuantities);
     const valuesCards = Object.values(verificationOfQuantities).sort();
 
     return valuesCards;
@@ -19,9 +18,7 @@ class Inspect {
 
   checkingPoker() {
     const cards = this.array;
-    const colorCards = this.checkingColor();
     const royalFlush = ["10", "J", "Q", "K", "A"].toString();
-    const straightFlush = ["7", "8", "9", "10", "J"].toString();
     const result = [];
 
     cards.forEach(element => {
@@ -29,36 +26,35 @@ class Inspect {
     });
 
     const finalResult = result.toString();
-
     if (royalFlush == finalResult) {
       return "Royal Flush";
-    } else if (straightFlush == finalResult) {
-      return "Straight Flush";
     }
   }
 
-  checkingColor() {
+  modifyValue() {
     const cards = this.array;
-    const colors = cards.reduce((result, item) => {
-      return {
-        ...result,
-        [item.color]: (result[item.color] || 0) + 1
-      };
-    }, {});
+    cards.forEach(element => {
+      switch (element.value) {
+        case "J":
+          element.value = "11";
+          break;
+        case "Q":
+          element.value = "12";
+          break;
+        case "K":
+          element.value = "13";
+          break;
+        case "A":
+          element.value = "14";
+          break;
+      }
+    });
 
-    const colorsCards = Object.values(colors);
-    if (colorsCards == 5) {
-      return true;
-    } else {
-      return false;
-    }
+    return cards;
   }
 
-  inspectionCards(values) {
-    const cards = this.array;
-    const highCard = this.highCard();
-    const flush = this.checkingColor();
-    const poker = this.checkingPoker();
+  checkingStraight() {
+    const cards = this.modifyValue();
     const straight =
       cards[1].value - cards[0].value == 1 &&
       cards[3].value - cards[2].value == 1 &&
@@ -66,9 +62,24 @@ class Inspect {
       cards[4].value - cards[3].value == 1
         ? true
         : false;
+    return straight;
+  }
+
+  checkingColor() {
+    return this.array.every(item => item.color === this.array[0].color);
+  }
+
+  inspectionCards() {
+    const values = this.checkingValues();
+    const highCard = this.highCard();
+    const flush = this.checkingColor();
+    const poker = this.checkingPoker();
+    const straight = this.checkingStraight();
 
     if (poker && flush) {
       return poker;
+    } else if (straight == true && flush == true) {
+      return "Straight flush";
     } else if (values.indexOf(4) > -1) {
       return "Four of a kind (Quads)";
     } else if (values.indexOf(2) > -1 && values.indexOf(3) > -1) {

@@ -1,17 +1,16 @@
 const cards = require("./cards");
 const { Inspect } = require("./inspection");
 
-// const userCards = cards.randomFiveCard();
-const userCards = [
-  { value: "10", color: "♥" },
-  { value: "J", color: "♥" },
-  { value: "Q", color: "♥" },
-  { value: "K", color: "♥" },
-  { value: "A", color: "♥" }
-];
+const userCards = cards.randomFiveCard();
+// const userCards = [
+//   { value: "6", color: "♥" },
+//   { value: "7", color: "♥" },
+//   { value: "8", color: "♥" },
+//   { value: "9", color: "♥" },
+//   { value: "10", color: "♥" }
+// ];
 console.log(userCards);
 
 const inspectCards = new Inspect(userCards);
-const valueCards = inspectCards.checkingValues();
-const inspectionCards = inspectCards.inspectionCards(valueCards);
+const inspectionCards = inspectCards.inspectionCards();
 console.log(inspectionCards);
