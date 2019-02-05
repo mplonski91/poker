@@ -23,10 +23,13 @@ class Inspect {
     const royalFlush = ["10", "J", "Q", "K", "A"].toString();
     const straightFlush = ["7", "8", "9", "10", "J"].toString();
     const result = [];
+
     cards.forEach(element => {
       result.push(element.value);
     });
+
     const finalResult = result.toString();
+
     if (royalFlush == finalResult) {
       return "Royal Flush";
     } else if (straightFlush == finalResult) {
@@ -51,10 +54,18 @@ class Inspect {
     }
   }
 
-  checkingPairs(values) {
+  inspectionCards(values) {
+    const cards = this.array;
     const highCard = this.highCard();
     const flush = this.checkingColor();
     const poker = this.checkingPoker();
+    const straight =
+      cards[1].value - cards[0].value == 1 &&
+      cards[3].value - cards[2].value == 1 &&
+      cards[2].value - cards[1].value == 1 &&
+      cards[4].value - cards[3].value == 1
+        ? true
+        : false;
 
     if (poker && flush) {
       return poker;
@@ -64,6 +75,8 @@ class Inspect {
       return "Full house";
     } else if (flush === true) {
       return "Flush";
+    } else if (straight == true) {
+      return "Straight";
     } else if (values.indexOf(3) > -1) {
       return "Three of a kind";
     } else if (values.indexOf(2) > -1) {
